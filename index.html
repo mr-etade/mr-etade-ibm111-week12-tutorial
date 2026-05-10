@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IBM111 Mathematics — Linear Independence — Tutorial Activity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">
+      <span class="brand-mark">IBM<span>111</span></span>
+      <span class="brand-divider"></span>
+      <span class="brand-meta">Mathematics &middot; Week 12 &middot; 2026</span>
+    </div>
+    <div class="instructor">
+      <span class="instructor-name">Mr. Eremas Tade</span>
+      <span class="instructor-email">etade@wpu.ac.pg</span>
+    </div>
+  </div>
+</header>
+
+<main class="page">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-pulse"><span class="pulse-dot"></span></div>
+    <div class="hero-tag">Tutorial Activity &middot; Interactive</div>
+    <h1 class="hero-title">Linear Independence of Vectors</h1>
+    <p class="hero-subtitle">When does a vector add something new &mdash; and which test should you use to find out?</p>
+    <div class="hero-divider"></div>
+    <p class="hero-instructions">
+      <strong>Welcome.</strong> Last week you saw how vectors combine. This week, you decide whether
+      a set of vectors is <em>linearly independent</em> (every vector adds something new) or
+      <em>linearly dependent</em> (at least one is redundant). Three test methods are available
+      &mdash; the trick is choosing the right one. Use the four demos below to build that intuition,
+      then move on to the practice questions.
+    </p>
+    <div class="hero-cta-row">
+      <a href="questions.html" class="cta-primary">Start the Questions <span class="cta-arrow">&rarr;</span></a>
+      <a href="#demos" class="cta-secondary">Explore the Demos <span class="cta-arrow">&darr;</span></a>
+    </div>
+  </section>
+
+  <!-- ============ NAVIGATION CARDS ============ -->
+  <section class="nav-grid">
+    <a href="#demo-tree" class="nav-card">
+      <span class="nav-card-eyebrow">Demo 1 &middot; Decision Tree</span>
+      <h2 class="nav-card-title">Which Method Should I Use?</h2>
+      <p class="nav-card-desc">Answer two questions about your vector set and get the recommended testing method.</p>
+      <span class="nav-card-arrow">EXPLORE <span>&rarr;</span></span>
+    </a>
+    <a href="#demo-patterns" class="nav-card">
+      <span class="nav-card-eyebrow">Demo 2 &middot; Quick Spot</span>
+      <h2 class="nav-card-title">Spotting Dependence at a Glance</h2>
+      <p class="nav-card-desc">Some sets are dependent for obvious reasons. Click each card to reveal the verdict.</p>
+      <span class="nav-card-arrow">EXPLORE <span>&rarr;</span></span>
+    </a>
+    <a href="#demo-vector-eq" class="nav-card">
+      <span class="nav-card-eyebrow">Demo 3 &middot; Method 1</span>
+      <h2 class="nav-card-title">Vector Equation, Step by Step</h2>
+      <p class="nav-card-desc">Walk through the four steps of the most fundamental test on a worked example.</p>
+      <span class="nav-card-arrow">EXPLORE <span>&rarr;</span></span>
+    </a>
+    <a href="#demo-det" class="nav-card">
+      <span class="nav-card-eyebrow">Demo 4 &middot; Method 3</span>
+      <h2 class="nav-card-title">Live Determinant Calculator</h2>
+      <p class="nav-card-desc">Enter a $2 \times 2$ or $3 \times 3$ matrix and watch the verdict update as you type.</p>
+      <span class="nav-card-arrow">EXPLORE <span>&rarr;</span></span>
+    </a>
+  </section>
+
+  <div id="demos"></div>
+
+  <!-- ============ DEMO 1: DECISION TREE ============ -->
+  <section class="card demo-card" id="demo-tree">
+    <div class="card-header">
+      <span class="card-num">Demo 1</span>
+      <h2 class="card-title">Which Method Should I Use?</h2>
+    </div>
+    <p class="card-lead">
+      You have three tools for testing independence: the <strong>vector equation</strong>, <strong>row reduction</strong>,
+      and the <strong>determinant</strong>. Each works best in different situations. Answer the two questions below and
+      the wizard will recommend the fastest reliable method for your set.
+    </p>
+
+    <div class="tree-wizard" id="tree-wizard">
+
+      <!-- Step 1: How many vectors? -->
+      <div class="tree-step tree-active" id="tree-step-1" data-step="1">
+        <p class="tree-step-eyebrow">Step 1 of 2</p>
+        <p class="tree-question">How many vectors are in your set?</p>
+        <div class="tree-options">
+          <button class="tree-btn" data-step="1" data-value="2">2 vectors</button>
+          <button class="tree-btn" data-step="1" data-value="3">3 vectors</button>
+          <button class="tree-btn" data-step="1" data-value="many">4 or more</button>
+        </div>
+      </div>
+
+      <!-- Step 2: dimension match? -->
+      <div class="tree-step tree-hidden" id="tree-step-2" data-step="2">
+        <p class="tree-step-eyebrow">Step 2 of 2</p>
+        <p class="tree-question" id="tree-q2">Are the vectors in $\mathbb{R}^n$ where $n$ matches the number of vectors?</p>
+        <div class="tree-options" id="tree-step-2-options">
+          <!-- options injected by script -->
+        </div>
+      </div>
+
+      <!-- Result -->
+      <div class="tree-result tree-hidden" id="tree-result">
+        <p class="tree-result-eyebrow">Recommended Method</p>
+        <h3 class="tree-result-title" id="tree-result-title"></h3>
+        <p class="tree-result-body" id="tree-result-body"></p>
+        <button class="tree-restart" id="tree-restart">Start Over</button>
+      </div>
+
+    </div>
+
+    <p class="card-lead" style="margin-top: 28px;">
+      The full picture in one table:
+    </p>
+    <table class="method-table">
+      <tr>
+        <th>Method</th>
+        <th>Best for</th>
+        <th>Limitation</th>
+      </tr>
+      <tr>
+        <td class="method-name">1. Vector Equation</td>
+        <td>Small sets, building understanding</td>
+        <td>Slow for larger sets</td>
+      </tr>
+      <tr>
+        <td class="method-name">2. Row Reduction</td>
+        <td>Any size set in $\mathbb{R}^n$ &mdash; the universal tool</td>
+        <td>Requires careful arithmetic</td>
+      </tr>
+      <tr>
+        <td class="method-name">3. Determinant</td>
+        <td>Square cases only ($n$ vectors in $\mathbb{R}^n$)</td>
+        <td>Fails for non-square matrices</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- ============ DEMO 2: QUICK-SPOT PATTERNS ============ -->
+  <section class="card demo-card" id="demo-patterns">
+    <div class="card-header">
+      <span class="card-num">Demo 2</span>
+      <h2 class="card-title">Spotting Dependence at a Glance</h2>
+    </div>
+    <p class="card-lead">
+      Some vector sets are <em>obviously</em> dependent &mdash; before you even pick up a pen. Train your eye on the
+      four patterns below. Click each card to reveal the verdict and the reason.
+    </p>
+
+    <div class="pattern-grid">
+
+      <!-- Pattern A: parallel -->
+      <div class="pattern-card" data-pattern="parallel">
+        <p class="pattern-label">Pattern A &middot; Parallel vectors</p>
+        <div class="pattern-vectors">
+          $\left\{ \begin{bmatrix} 1 \\ 3 \end{bmatrix},\ \begin{bmatrix} 2 \\ 6 \end{bmatrix} \right\}$
+        </div>
+        <p class="pattern-hint">Click to reveal &middot; one is a scalar multiple of the other</p>
+        <div class="pattern-verdict dependent">
+          <strong>Dependent.</strong> Notice $\begin{bmatrix} 2 \\ 6 \end{bmatrix} = 2\begin{bmatrix} 1 \\ 3 \end{bmatrix}$.
+          Whenever one vector is a scalar multiple of another, the set is dependent &mdash; no calculation needed.
+        </div>
+      </div>
+
+      <!-- Pattern B: zero vector -->
+      <div class="pattern-card" data-pattern="zero">
+        <p class="pattern-label">Pattern B &middot; Contains the zero vector</p>
+        <div class="pattern-vectors">
+          $\left\{ \begin{bmatrix} 0 \\ 0 \end{bmatrix},\ \begin{bmatrix} 1 \\ 4 \end{bmatrix},\ \begin{bmatrix} 2 \\ 7 \end{bmatrix} \right\}$
+        </div>
+        <p class="pattern-hint">Click to reveal &middot; what does the zero vector contribute?</p>
+        <div class="pattern-verdict dependent">
+          <strong>Dependent.</strong> Take $c_1 = 1, c_2 = c_3 = 0$ to get $1 \cdot \vec{0} + 0 \cdot \vec{v}_2 + 0 \cdot \vec{v}_3 = \vec{0}$
+          &mdash; a non-trivial solution. Any set containing $\vec{0}$ is dependent.
+        </div>
+      </div>
+
+      <!-- Pattern C: too many -->
+      <div class="pattern-card" data-pattern="toomany">
+        <p class="pattern-label">Pattern C &middot; More vectors than dimensions</p>
+        <div class="pattern-vectors">
+          $\left\{ \begin{bmatrix} 1 \\ 0 \end{bmatrix},\ \begin{bmatrix} 0 \\ 1 \end{bmatrix},\ \begin{bmatrix} 5 \\ 7 \end{bmatrix} \right\}$
+        </div>
+        <p class="pattern-hint">Click to reveal &middot; three vectors in $\mathbb{R}^2$</p>
+        <div class="pattern-verdict dependent">
+          <strong>Dependent.</strong> You cannot fit more than $n$ independent vectors in $\mathbb{R}^n$.
+          With 3 vectors in $\mathbb{R}^2$, the third must be a combination of the first two
+          (here: $5\vec{v}_1 + 7\vec{v}_2$).
+        </div>
+      </div>
+
+      <!-- Pattern D: standard basis -->
+      <div class="pattern-card" data-pattern="basis">
+        <p class="pattern-label">Pattern D &middot; Standard unit vectors</p>
+        <div class="pattern-vectors">
+          $\left\{ \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix},\ \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix},\ \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \right\}$
+        </div>
+        <p class="pattern-hint">Click to reveal &middot; the cleanest example</p>
+        <div class="pattern-verdict independent">
+          <strong>Independent.</strong> Each vector points along a different axis &mdash; none can be combined from the
+          others. This is the standard basis of $\mathbb{R}^3$, and the foundation of every coordinate system.
+        </div>
+      </div>
+
+      <!-- Pattern E: repeated -->
+      <div class="pattern-card" data-pattern="repeated">
+        <p class="pattern-label">Pattern E &middot; A repeated vector</p>
+        <div class="pattern-vectors">
+          $\left\{ \begin{bmatrix} 2 \\ 1 \end{bmatrix},\ \begin{bmatrix} 4 \\ 3 \end{bmatrix},\ \begin{bmatrix} 2 \\ 1 \end{bmatrix} \right\}$
+        </div>
+        <p class="pattern-hint">Click to reveal &middot; spot the repeat</p>
+        <div class="pattern-verdict dependent">
+          <strong>Dependent.</strong> Take $c_1 = 1, c_2 = 0, c_3 = -1$:
+          $\,1 \cdot \vec{v}_1 + 0 \cdot \vec{v}_2 - 1 \cdot \vec{v}_1 = \vec{0}.$
+          Any set with a repeated vector is dependent.
+        </div>
+      </div>
+
+      <!-- Pattern F: needs work -->
+      <div class="pattern-card" data-pattern="needswork">
+        <p class="pattern-label">Pattern F &middot; No obvious shortcut</p>
+        <div class="pattern-vectors">
+          $\left\{ \begin{bmatrix} 1 \\ 2 \end{bmatrix},\ \begin{bmatrix} 3 \\ 5 \end{bmatrix} \right\}$
+        </div>
+        <p class="pattern-hint">Click to reveal &middot; not parallel, no zeros, just-right size</p>
+        <div class="pattern-verdict independent">
+          <strong>Needs a method.</strong> No quick-spot pattern applies. Use the determinant:
+          $\det\!\begin{bmatrix} 1 & 3 \\ 2 & 5 \end{bmatrix} = 5 - 6 = -1 \ne 0$, so the set is
+          <strong>independent</strong>. When in doubt, compute.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ DEMO 3: VECTOR-EQUATION WALKTHROUGH ============ -->
+  <section class="card demo-card" id="demo-vector-eq">
+    <div class="card-header">
+      <span class="card-num">Demo 3 &middot; Method 1</span>
+      <h2 class="card-title">Vector Equation, Step by Step</h2>
+    </div>
+    <p class="card-lead">
+      The most fundamental test follows directly from the definition. Walk through each step on the example
+      $\vec{v}_1 = \begin{bmatrix} 1 \\ 2 \end{bmatrix}$, $\vec{v}_2 = \begin{bmatrix} 3 \\ 5 \end{bmatrix}$
+      &mdash; we want to know whether they are independent.
+    </p>
+
+    <div class="step-controls">
+      <button class="op-btn" id="step-prev">&larr; Previous</button>
+      <button class="op-btn" id="step-next">Next &rarr;</button>
+      <button class="reset-btn" id="step-reset">Restart</button>
+      <span class="step-progress" id="step-progress">Step 1 of 5</span>
+    </div>
+
+    <div class="step-display" id="step-display">
+      <!-- contents injected by script -->
+    </div>
+  </section>
+
+  <!-- ============ DEMO 4: LIVE DETERMINANT CALCULATOR ============ -->
+  <section class="card demo-card" id="demo-det">
+    <div class="card-header">
+      <span class="card-num">Demo 4 &middot; Method 3</span>
+      <h2 class="card-title">Live Determinant Calculator</h2>
+    </div>
+    <p class="card-lead">
+      The determinant gives the verdict in one number &mdash; but only when the matrix is square.
+      Edit the entries below and watch the determinant and the verdict update as you type. Try the presets
+      to see classic dependent and independent cases.
+    </p>
+
+    <div class="det-matrix-wrap">
+
+      <div class="det-size-toggle">
+        <span>Matrix size:</span>
+        <button class="det-size-btn active" data-size="2">$2 \times 2$</button>
+        <button class="det-size-btn" data-size="3">$3 \times 3$</button>
+      </div>
+
+      <div id="det-grid">
+        <!-- input grid injected by script -->
+      </div>
+
+      <div class="det-presets" id="det-presets">
+        <!-- preset buttons injected by script -->
+      </div>
+
+      <div class="det-readout">
+        <p class="det-readout-line" id="det-formula"></p>
+        <p class="det-readout-value" id="det-value">$\det(A) = 0$</p>
+        <span class="verdict-pill neutral" id="det-verdict">awaiting input</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section class="card" style="text-align: center; border-left: 4px solid var(--navy);">
+    <h2 style="font-family: var(--serif); color: var(--navy); font-size: 26px; margin: 0 0 12px;">Ready for the practice questions?</h2>
+    <p style="color: var(--muted); margin: 0 0 24px; font-size: 15px;">
+      Ten questions across four sections, with instant feedback. Work them in your exercise book first, then enter your answers.
+    </p>
+    <a href="questions.html" class="cta-primary">Begin the Tutorial Questions <span class="cta-arrow">&rarr;</span></a>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">Western Pacific University &middot; IBM111 Mathematics</div>
+    <div class="footer-meta">Prepared by Mr. Eremas Tade &middot; 2026</div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

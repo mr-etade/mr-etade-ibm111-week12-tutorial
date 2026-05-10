@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IBM111 Mathematics — Linear Independence — Questions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">
+      <span class="brand-mark">IBM<span>111</span></span>
+      <span class="brand-divider"></span>
+      <span class="brand-meta">Mathematics &middot; Week 12 &middot; 2026</span>
+    </div>
+    <div class="instructor">
+      <span class="instructor-name">Mr. Eremas Tade</span>
+      <span class="instructor-email">etade@wpu.ac.pg</span>
+    </div>
+  </div>
+</header>
+
+<main class="page">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-tag">Tutorial Questions</div>
+    <h1 class="hero-title">Linear Independence</h1>
+    <p class="hero-subtitle">Ten questions across four sections &mdash; instant feedback as you go.</p>
+    <div class="hero-divider"></div>
+    <p class="hero-instructions">
+      <strong>Instructions.</strong> Work each question in your exercise book using proper mathematical
+      notation, then enter your answer below. Use fractions like <code>2/5</code> or decimals like
+      <code>0.4</code> where needed.
+      Need a refresher? <a href="index.html" style="color: var(--navy); font-weight: 500;">Return to the demos &rarr;</a>
+    </p>
+    <div class="progress-bar-wrap">
+      <div class="progress-label">
+        <span>Progress</span>
+        <span id="progress-text">0 / 10 questions</span>
+      </div>
+      <div class="progress-track"><div id="progress-fill" class="progress-fill"></div></div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION A: DEFINITIONS ============ -->
+  <section class="section">
+    <div class="section-marker">
+      <span class="section-letter">A</span>
+      <h2>Definitions &amp; the Trivial Solution</h2>
+    </div>
+
+    <div class="reminder">
+      <p class="reminder-title">Reminder &mdash; Definition</p>
+      <p>
+        A set $\{\vec{v}_1, \ldots, \vec{v}_n\}$ is <em>linearly independent</em> if the only solution to
+        $c_1 \vec{v}_1 + \cdots + c_n \vec{v}_n = \vec{0}$ is the trivial one, $c_1 = \cdots = c_n = 0$.
+        Otherwise, the set is <em>linearly dependent</em>.
+      </p>
+    </div>
+
+    <!-- Question 1 -->
+    <article class="card question-card" data-qid="q1">
+      <div class="card-header">
+        <span class="card-num">Question 1</span>
+        <h3 class="card-title">What Defines Independence?</h3>
+      </div>
+      <p class="question-text">
+        Which statement correctly describes a <em>linearly independent</em> set of vectors $\{\vec{v}_1, \vec{v}_2, \ldots, \vec{v}_n\}$?
+      </p>
+      <div class="answer-row">
+        <label class="answer-label">Choose one:</label>
+        <div class="choice-group choice-vertical" data-q="q1">
+          <button class="choice" data-val="a">There exist scalars $c_1, \ldots, c_n$ (not all zero) with $c_1\vec{v}_1 + \cdots + c_n\vec{v}_n = \vec{0}$.</button>
+          <button class="choice" data-val="b">The only solution to $c_1\vec{v}_1 + \cdots + c_n\vec{v}_n = \vec{0}$ is $c_1 = \cdots = c_n = 0$.</button>
+          <button class="choice" data-val="c">Each vector $\vec{v}_i$ has length $1$.</button>
+          <button class="choice" data-val="d">The vectors all point in the same direction.</button>
+        </div>
+      </div>
+      <div class="feedback" id="fb-q1"></div>
+    </article>
+
+    <!-- Question 2 -->
+    <article class="card question-card" data-qid="q2">
+      <div class="card-header">
+        <span class="card-num">Question 2</span>
+        <h3 class="card-title">Spotting an Instant Dependency</h3>
+      </div>
+      <p class="question-text">
+        Without doing any calculation, why is the set
+        $\left\{ \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix},\ \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix},\ \begin{bmatrix} 4 \\ 5 \\ 6 \end{bmatrix} \right\}$
+        linearly dependent?
+      </p>
+      <div class="answer-row">
+        <label class="answer-label">Choose the best reason:</label>
+        <div class="choice-group choice-vertical" data-q="q2">
+          <button class="choice" data-val="a">The vectors are too small.</button>
+          <button class="choice" data-val="b">Any set containing the zero vector is automatically dependent &mdash; take $c_1 = 1$ and the other coefficients $0$ to get a non-trivial solution.</button>
+          <button class="choice" data-val="c">The vectors are not unit vectors.</button>
+          <button class="choice" data-val="d">The vectors are in $\mathbb{R}^3$ and there are three of them.</button>
+        </div>
+      </div>
+      <div class="feedback" id="fb-q2"></div>
+    </article>
+  </section>
+
+  <!-- ============ SECTION B: METHOD 3 — DETERMINANT ============ -->
+  <section class="section">
+    <div class="section-marker">
+      <span class="section-letter">B</span>
+      <h2>Testing with the Determinant</h2>
+    </div>
+
+    <div class="reminder">
+      <p class="reminder-title">Reminder &mdash; Method 3</p>
+      <p>
+        For $n$ vectors in $\mathbb{R}^n$, build a square matrix $A$ with the vectors as columns. Then
+        $\det(A) \ne 0 \Rightarrow$ <em>independent</em>; $\det(A) = 0 \Rightarrow$ <em>dependent</em>.
+        This method only works when the matrix is square.
+      </p>
+    </div>
+
+    <!-- Question 3 -->
+    <article class="card question-card" data-qid="q3">
+      <div class="card-header">
+        <span class="card-num">Question 3</span>
+        <h3 class="card-title">Determinant of a $2 \times 2$ Matrix</h3>
+      </div>
+      <p class="question-text">
+        Compute the determinant of the matrix formed by placing
+        $\vec{v}_1 = \begin{bmatrix} 4 \\ 1 \end{bmatrix}$ and $\vec{v}_2 = \begin{bmatrix} 3 \\ 2 \end{bmatrix}$
+        as columns.
+      </p>
+      <div class="matrix-display">
+        $$ A = \begin{bmatrix} 4 & 3 \\ 1 & 2 \end{bmatrix} $$
+      </div>
+      <div class="answer-row inline-input-row">
+        <label class="answer-label">Enter the determinant:</label>
+        <div class="inline-inputs">
+          <span class="inline-var">$\det(A) = $</span>
+          <input class="cell-input small" data-q="q3" data-cell="det" type="text" placeholder="?">
+        </div>
+      </div>
+      <button class="check-btn" data-check="q3">Check Answer</button>
+      <div class="feedback" id="fb-q3"></div>
+    </article>
+
+    <!-- Question 4 -->
+    <article class="card question-card" data-qid="q4">
+      <div class="card-header">
+        <span class="card-num">Question 4</span>
+        <h3 class="card-title">Verdict from the Determinant</h3>
+      </div>
+      <p class="question-text">
+        Using your answer to Question&nbsp;3, what is the correct conclusion about the set $\{\vec{v}_1, \vec{v}_2\}$?
+      </p>
+      <div class="answer-row">
+        <label class="answer-label">Choose one:</label>
+        <div class="choice-group choice-vertical" data-q="q4">
+          <button class="choice" data-val="a">Linearly dependent &mdash; the determinant is non-zero.</button>
+          <button class="choice" data-val="b">Linearly independent &mdash; the determinant is non-zero.</button>
+          <button class="choice" data-val="c">Linearly dependent &mdash; the determinant is zero.</button>
+          <button class="choice" data-val="d">Cannot be determined from the determinant alone.</button>
+        </div>
+      </div>
+      <div class="feedback" id="fb-q4"></div>
+    </article>
+
+    <!-- Question 5 -->
+    <article class="card question-card" data-qid="q5">
+      <div class="card-header">
+        <span class="card-num">Question 5</span>
+        <h3 class="card-title">Determinant of a $3 \times 3$ Matrix</h3>
+      </div>
+      <p class="question-text">
+        Use cofactor expansion along the first row to compute $\det(A)$ for the matrix below, where the columns are
+        $\vec{v}_1 = \begin{bmatrix} 1 \\ 0 \\ 2 \end{bmatrix},\ \vec{v}_2 = \begin{bmatrix} 2 \\ 1 \\ 3 \end{bmatrix},\ \vec{v}_3 = \begin{bmatrix} 0 \\ -1 \\ 1 \end{bmatrix}.$
+      </p>
+      <div class="matrix-display">
+        $$ A = \begin{bmatrix} 1 & 2 & 0 \\ 0 & 1 & -1 \\ 2 & 3 & 1 \end{bmatrix} $$
+      </div>
+      <div class="answer-row inline-input-row">
+        <label class="answer-label">Enter the determinant:</label>
+        <div class="inline-inputs">
+          <span class="inline-var">$\det(A) = $</span>
+          <input class="cell-input small" data-q="q5" data-cell="det" type="text" placeholder="?">
+        </div>
+      </div>
+      <button class="check-btn" data-check="q5">Check Answer</button>
+      <div class="feedback" id="fb-q5"></div>
+    </article>
+  </section>
+
+  <!-- ============ SECTION C: METHODS 1 & 2 ============ -->
+  <section class="section">
+    <div class="section-marker">
+      <span class="section-letter">C</span>
+      <h2>The Vector Equation &amp; Row Reduction</h2>
+    </div>
+
+    <div class="reminder">
+      <p class="reminder-title">Reminder &mdash; Methods 1 and 2</p>
+      <p>
+        <strong>Method 1:</strong> set up $c_1\vec{v}_1 + \cdots + c_n\vec{v}_n = \vec{0}$, equate components to get a system,
+        and solve. <strong>Method 2:</strong> form a matrix with the vectors as columns and row-reduce. Count pivot columns
+        &mdash; one per column means independent.
+      </p>
+    </div>
+
+    <!-- Question 6 -->
+    <article class="card question-card" data-qid="q6">
+      <div class="card-header">
+        <span class="card-num">Question 6</span>
+        <h3 class="card-title">Solving the Vector Equation</h3>
+      </div>
+      <p class="question-text">
+        Test whether $\vec{v}_1 = \begin{bmatrix} 2 \\ 1 \end{bmatrix}$ and $\vec{v}_2 = \begin{bmatrix} 1 \\ 4 \end{bmatrix}$
+        are independent by solving $c_1 \vec{v}_1 + c_2 \vec{v}_2 = \vec{0}$. Enter the values of $c_1$ and $c_2$ that you find.
+      </p>
+      <div class="answer-row inline-input-row">
+        <label class="answer-label">Enter the only solution:</label>
+        <div class="inline-inputs">
+          <span class="inline-var">$c_1 = $</span>
+          <input class="cell-input small" data-q="q6" data-cell="c1" type="text" placeholder="?">
+          <span class="inline-var">$c_2 = $</span>
+          <input class="cell-input small" data-q="q6" data-cell="c2" type="text" placeholder="?">
+        </div>
+      </div>
+      <button class="check-btn" data-check="q6">Check Answer</button>
+      <div class="feedback" id="fb-q6"></div>
+    </article>
+
+    <!-- Question 7 -->
+    <article class="card question-card" data-qid="q7">
+      <div class="card-header">
+        <span class="card-num">Question 7</span>
+        <h3 class="card-title">Reading a Row-Reduced Matrix</h3>
+      </div>
+      <p class="question-text">
+        A set of three vectors in $\mathbb{R}^3$ has been placed as columns of a matrix and row-reduced. The result is shown below.
+        How many <em>pivot columns</em> are there, and what is the verdict on independence?
+      </p>
+      <div class="matrix-display">
+        $$ \begin{bmatrix} 1 & 2 & 1 \\ 0 & 0 & -2 \\ 0 & 0 & 0 \end{bmatrix} $$
+      </div>
+      <div class="answer-row">
+        <label class="answer-label">Choose the correct interpretation:</label>
+        <div class="choice-group choice-vertical" data-q="q7">
+          <button class="choice" data-val="a">Three pivot columns &mdash; independent.</button>
+          <button class="choice" data-val="b">Two pivot columns (columns 1 and 3) &mdash; dependent, because column 2 has no pivot.</button>
+          <button class="choice" data-val="c">One pivot column &mdash; dependent.</button>
+          <button class="choice" data-val="d">No pivot columns &mdash; impossible to decide.</button>
+        </div>
+      </div>
+      <div class="feedback" id="fb-q7"></div>
+    </article>
+  </section>
+
+  <!-- ============ SECTION D: METHOD CHOICE & APPLICATIONS ============ -->
+  <section class="section">
+    <div class="section-marker">
+      <span class="section-letter">D</span>
+      <h2>Choosing a Method &amp; Applications</h2>
+    </div>
+
+    <div class="reminder">
+      <p class="reminder-title">Reminder &mdash; Picking the right tool</p>
+      <p>
+        Before computing, scan for instant patterns (zero vector, parallel pair, more vectors than dimensions).
+        For square cases, the <em>determinant</em> is fastest. For non-square cases, use <em>row reduction</em>.
+        The <em>vector equation</em> always works but takes longest.
+      </p>
+    </div>
+
+    <!-- Question 8 -->
+    <article class="card question-card" data-qid="q8">
+      <div class="card-header">
+        <span class="card-num">Question 8</span>
+        <h3 class="card-title">Choosing a Method</h3>
+      </div>
+      <p class="question-text">
+        You are asked to test the independence of four vectors in $\mathbb{R}^4$. Which method is the most efficient
+        first choice?
+      </p>
+      <div class="answer-row">
+        <label class="answer-label">Choose one:</label>
+        <div class="choice-group choice-vertical" data-q="q8">
+          <button class="choice" data-val="a">The vector equation (Method 1) &mdash; it always works.</button>
+          <button class="choice" data-val="b">The determinant (Method 3) &mdash; the matrix is square ($4 \times 4$), so the determinant gives the answer directly.</button>
+          <button class="choice" data-val="c">No method is needed &mdash; four vectors in $\mathbb{R}^4$ are always dependent.</button>
+          <button class="choice" data-val="d">Row reduction (Method 2) &mdash; determinant is undefined for $4 \times 4$ matrices.</button>
+        </div>
+      </div>
+      <div class="feedback" id="fb-q8"></div>
+    </article>
+
+    <!-- Question 9 -->
+    <article class="card question-card" data-qid="q9">
+      <div class="card-header">
+        <span class="card-num">Question 9</span>
+        <h3 class="card-title">Aviation: Independent Reference Vectors</h3>
+      </div>
+      <p class="question-text">
+        An aircraft uses two reference vectors for two-dimensional ground navigation. The flight system records them as
+        $\vec{r}_1 = \begin{bmatrix} 3 \\ 1 \end{bmatrix}$ and $\vec{r}_2 = \begin{bmatrix} 6 \\ k \end{bmatrix}$, where $k$ is a constant.
+        For the navigation system to work, the two vectors must be <em>linearly independent</em>.
+        For which value of $k$ does the system <strong>fail</strong> (i.e.\ the vectors become dependent)?
+      </p>
+      <div class="answer-row inline-input-row">
+        <label class="answer-label">Enter the failing value:</label>
+        <div class="inline-inputs">
+          <span class="inline-var">$k = $</span>
+          <input class="cell-input small" data-q="q9" data-cell="k" type="text" placeholder="?">
+        </div>
+      </div>
+      <button class="check-btn" data-check="q9">Check Answer</button>
+      <div class="feedback" id="fb-q9"></div>
+    </article>
+
+    <!-- Question 10 -->
+    <article class="card question-card" data-qid="q10">
+      <div class="card-header">
+        <span class="card-num">Question 10</span>
+        <h3 class="card-title">Business: Are These Metrics Redundant?</h3>
+      </div>
+      <p class="question-text">
+        A small Mt.&nbsp;Hagen retailer tracks three weekly performance metrics for each of three products, recorded as
+        $\vec{m}_1 = \begin{bmatrix} 2 \\ 1 \\ 3 \end{bmatrix}$,
+        $\vec{m}_2 = \begin{bmatrix} 4 \\ 2 \\ 6 \end{bmatrix}$, and
+        $\vec{m}_3 = \begin{bmatrix} 1 \\ 0 \\ 5 \end{bmatrix}.$
+        The owner wants to know whether all three metrics carry independent information.
+        Are these vectors linearly independent or dependent?
+      </p>
+      <div class="answer-row">
+        <label class="answer-label">Choose the best reason:</label>
+        <div class="choice-group choice-vertical" data-q="q10">
+          <button class="choice" data-val="a">Independent &mdash; the determinant is non-zero.</button>
+          <button class="choice" data-val="b">Dependent &mdash; observe that $\vec{m}_2 = 2 \vec{m}_1$, so the second metric carries no new information.</button>
+          <button class="choice" data-val="c">Independent &mdash; three vectors in $\mathbb{R}^3$ are always independent.</button>
+          <button class="choice" data-val="d">Dependent &mdash; the third vector contains a $5$, which is redundant.</button>
+        </div>
+      </div>
+      <div class="feedback" id="fb-q10"></div>
+    </article>
+  </section>
+
+  <!-- ============ COMPLETION ============ -->
+  <section class="completion-card" id="completion-card" hidden>
+    <div class="completion-stamp">&#10003;</div>
+    <h2>Tutorial Complete</h2>
+    <p>
+      Excellent work. You now know how to test linear independence three different ways &mdash; and how to pick
+      the fastest method for each situation.
+    </p>
+    <p class="completion-score" id="completion-score"></p>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">Western Pacific University &middot; IBM111 Mathematics</div>
+    <div class="footer-meta">Prepared by Mr. Eremas Tade &middot; 2026</div>
+  </div>
+</footer>
+
+<script src="questions-script.js"></script>
+</body>
+</html>
